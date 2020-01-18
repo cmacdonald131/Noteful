@@ -29,7 +29,7 @@ export default class AddNote extends Component {
         return (
             <form onSubmit={this.onSubmit}>
                 <label htmlFor="noteName" style={{ color: "white", marginRight: "5px", marginLeft: "5px" }}>Name of Note</label>
-                <input type="text" name="noteName"></input>
+                <input type="text" name="noteName" required></input>
                 <label htmlFor="content" style={{ color: "white", marginRight: "5px", marginLeft: "5px" }}>What do you need to do?</label>
                 <input type="text" name="content"></input>
                 <select name="folderId">
