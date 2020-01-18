@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import config from './config';
-import PropTypes from 'prop-types';
+import ApiContext from './ApiContext';
 
 export default class AddFolder extends Component {
-    onSubmit(e) {
+    static contextType = ApiContext
+    onSubmit = (e) => {
         e.preventDefault();
         const folderName = e.target.folderName.value;
         fetch(`${config.API_ENDPOINT}/folders`, {
@@ -15,21 +16,21 @@ export default class AddFolder extends Component {
                 "content-type": "application/json",
             }
         })
-            .then(e => console.log(e))
+
+            .then(e => {
+                this.context.refreshData()
+                this.props.history.push('/')
+            })
+
     }
     render() {
         return (
             <form onSubmit={this.onSubmit}>
-                <input type="text" name="folderName"></input>
+                <label htmlFor="folderName" style={{ marginRight: "5px", marginLeft: "5px" }}>New folder name</label>
+                <input type="text" name="folderName" required></input>
                 <button type="submit" name="btn">Save Folder</button>
             </form>
         )
     }
-
-
 };
-
-AddFolder.propTypes = {
-    name: PropTypes.string
-}
 
