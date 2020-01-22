@@ -46,6 +46,18 @@ class App extends Component {
         });
     };
 
+    refreshFolder = (folder) => {
+        this.setState({
+            folders: [...this.state.folders, folder]
+        })
+    }
+
+    refreshNote = (note) => {
+        this.setState({
+            notes: [...this.state.notes, note]
+        })
+    }
+
     renderNavRoutes() {
         return (
             <>
@@ -89,7 +101,8 @@ class App extends Component {
             notes: this.state.notes,
             folders: this.state.folders,
             deleteNote: this.handleDeleteNote,
-            refreshData: this.componentDidMount
+            refreshFolder: this.refreshFolder,
+            refreshNote: this.refreshNote
         };
         return (
             <ApiContext.Provider value={value}>
