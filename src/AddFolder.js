@@ -3,6 +3,7 @@ import config from './config';
 import ApiContext from './ApiContext';
 
 export default class AddFolder extends Component {
+
     static contextType = ApiContext
     onSubmit = (e) => {
         e.preventDefault();
@@ -17,8 +18,10 @@ export default class AddFolder extends Component {
             }
         })
 
-            .then(e => {
-                this.context.refreshData()
+            .then(note => {
+                return note.json()
+            }).then(data => {
+                this.context.refreshFolder(data)
                 this.props.history.push('/')
             })
 
